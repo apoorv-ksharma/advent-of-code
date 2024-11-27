@@ -1,22 +1,16 @@
 package main
 
 import (
+	"aoc/utils"
 	"bufio"
 	"fmt"
 	"os"
 	"strconv"
 )
 
-func min(a, b int) int {
-	if a < b {
-		return a
-	}
-	return b
-}
-
 func main() {
 	// Read file
-	filePath := "inputs/day1.txt"
+	filePath := "day1/day1.txt"
 	readFile, err := os.Open(filePath)
 
 	if err != nil {
@@ -47,7 +41,7 @@ func main() {
 			// Loop over the numbers array
 			for j := 0; j < len(number_spelled_out); j++ {
 				// last_index is length of the spelled out number or length of the string
-				last_index := min((i + len(number_spelled_out[j])), len(line))
+				last_index := utils.Min((i + len(number_spelled_out[j])), len(line))
 
 				// Get the string number of the length of the number
 				string_number := (line[i:last_index])
@@ -80,7 +74,7 @@ func main() {
 					if it had to be read in reverse as well
 					(eno is valid then just reverse the line string and number_spelled_out[j] and go with first loop)
 				*/
-				last_index := min((i + len(number_spelled_out[j])), len(line))
+				last_index := utils.Min((i + len(number_spelled_out[j])), len(line))
 				string_number := (line[i:last_index])
 				if string_number == (number_spelled_out[j]) {
 

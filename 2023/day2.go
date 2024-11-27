@@ -1,6 +1,7 @@
 package main
 
 import (
+	"aoc/utils"
 	"bufio"
 	"fmt"
 	"os"
@@ -13,13 +14,6 @@ type game struct {
 	blue       int
 	green      int
 	gameNumber int
-}
-
-func max(a, b int) int {
-	if a > b {
-		return a
-	}
-	return b
 }
 
 func main() {
@@ -64,13 +58,13 @@ func main() {
 				color := strings.Split(result, " ")[2]
 
 				if color == "red" {
-					game.red = max(number, game.red)
+					game.red = utils.Max(number, game.red)
 				}
 				if color == "blue" {
-					game.blue = max(number, game.blue)
+					game.blue = utils.Max(number, game.blue)
 				}
 				if color == "green" {
-					game.green = max(number, game.green)
+					game.green = utils.Max(number, game.green)
 				}
 			}
 

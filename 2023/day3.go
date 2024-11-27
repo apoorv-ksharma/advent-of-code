@@ -1,25 +1,12 @@
 package main
 
 import (
+	"aoc/utils"
 	"bufio"
 	"fmt"
 	"os"
 	"strconv"
 )
-
-func max(a, b int) int {
-	if a > b {
-		return a
-	}
-	return b
-}
-
-func min(a, b int) int {
-	if a > b {
-		return b
-	}
-	return a
-}
 
 type indexValue struct {
 	number    string
@@ -70,7 +57,7 @@ func hasSymbolAdjacent(lines []string, line_index int, start_index int, end_inde
 	str_position := position{0, 0}
 
 outer:
-	for i := max(line_index-1, 0); i <= min(line_index+1, len(lines)-1); i++ {
+	for i := utils.Max(line_index-1, 0); i <= utils.Min(line_index+1, len(lines)-1); i++ {
 		for j := start_index; j <= end_index; j++ {
 			letter := string(lines[i][j])
 			if letter == "." || isStringNumber(letter) {
@@ -127,7 +114,7 @@ func main() {
 				if err != nil {
 					panic(err)
 				}
-				adjacent := hasSymbolAdjacent(file_lines, line, max(start_index-1, 0), min(end_index+1, len(file_lines[line])-1))
+				adjacent := hasSymbolAdjacent(file_lines, line, utils.Max(start_index-1, 0), utils.Min(end_index+1, len(file_lines[line])-1))
 				if adjacent.symbol != "" {
 					sum = sum + number
 				}

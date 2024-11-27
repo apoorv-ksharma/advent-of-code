@@ -1,20 +1,12 @@
 package main
 
 import (
-	"bufio"
+	"aoc/utils"
 	"fmt"
-	"os"
 	"strconv"
 	"strings"
 	"sync"
 )
-
-func min(a, b int) int {
-	if a > b {
-		return b
-	}
-	return a
-}
 
 type crop struct {
 	seed_start int
@@ -56,18 +48,10 @@ func findCropProp(source string, destination string, s_number int, array []cropM
 }
 
 func main() {
-	filepath := "inputs/day5.txt"
-	file, err := os.Open(filepath)
+	file_lines, err := utils.ReadLines("inputs/day5.txt")
 
 	if err != nil {
-		panic(err)
-	}
-
-	scanner := bufio.NewScanner(file)
-	var file_lines []string
-
-	for scanner.Scan() {
-		file_lines = append(file_lines, scanner.Text())
+		fmt.Println("Error reading files")
 	}
 
 	var crops []crop
@@ -144,10 +128,12 @@ func main() {
 	}
 	min_location := 0
 
+	fmt.Println(len(crops))
+
 	for _, crop := range crops {
 		var wg sync.WaitGroup
 		wg.Add(crop.seed_range)
-
+		fmt.Println(crop.seed_range)
 		for i := 0; i < crop.seed_range; i++ {
 			go func(i int) {
 				defer wg.Done()
@@ -164,7 +150,7 @@ func main() {
 					min_location = location
 				}
 
-				min_location = min(min_location, location)
+				min_location = utils.Min(min_location, location)
 			}(i)
 		}
 
