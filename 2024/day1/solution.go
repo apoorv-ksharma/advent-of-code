@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func sort(array []int) []int {
+func bubbleSort(array []int) []int {
 	for i := 0; i < len(array); i++ {
 		for j := 0; j < len(array)-i-1; j++ {
 			if array[j] > array[j+1] {
@@ -40,7 +40,7 @@ func main() {
 
 		leftArr, rightArr = append(leftArr, left), append(rightArr, right)
 	}
-	leftArr, rightArr = sort(leftArr), sort(rightArr)
+	leftArr, rightArr = bubbleSort(leftArr), bubbleSort(rightArr)
 
 	var sum int
 	var similarity int
